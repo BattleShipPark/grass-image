@@ -7,19 +7,19 @@ import java.util.List;
 /**
  */
 
-public class DaumResultChannel {
+public class ReposDaumResultChannel {
     public int result;
-    public List<DaumResultItem> item;
+    public List<ReposDaumResultItem> item;
 
     @VisibleForTesting
-    public DaumResultChannel(int result, List<DaumResultItem> item) {
+    public ReposDaumResultChannel(int result, List<ReposDaumResultItem> item) {
         this.result = result;
         this.item = item;
     }
 
     @Override
     public String toString() {
-        return "DaumResultChannel{" +
+        return "ReposDaumResultChannel{" +
                 "result=" + result +
                 ", item=" + item +
                 '}';

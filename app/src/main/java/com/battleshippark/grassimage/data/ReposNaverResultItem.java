@@ -5,13 +5,13 @@ import android.support.annotation.VisibleForTesting;
 /**
  */
 
-public class NaverResultItem {
+public class ReposNaverResultItem {
     public String title;
     public String thumbnail;
     public String sizewidth, sizeheight;
 
     @VisibleForTesting
-    public NaverResultItem(String title, String thumbnail, String sizewidth, String sizeheight) {
+    public ReposNaverResultItem(String title, String thumbnail, String sizewidth, String sizeheight) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.sizewidth = sizewidth;
@@ -20,7 +20,7 @@ public class NaverResultItem {
 
     @Override
     public String toString() {
-        return "NaverResultItem{" +
+        return "ReposNaverResultItem{" +
                 "title='" + title + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
                 ", sizewidth='" + sizewidth + '\'' +

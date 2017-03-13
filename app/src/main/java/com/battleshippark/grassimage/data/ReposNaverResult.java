@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ReposNaverResult {
     public int total;
-    public List<NaverResultItem> items;
+    public List<ReposNaverResultItem> items;
 
-    public ReposNaverResult(int total, List<NaverResultItem> items) {
+    public ReposNaverResult(int total, List<ReposNaverResultItem> items) {
         this.total = total;
         this.items = items;
     }

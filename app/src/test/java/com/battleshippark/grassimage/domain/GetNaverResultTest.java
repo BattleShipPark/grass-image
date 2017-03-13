@@ -1,6 +1,6 @@
 package com.battleshippark.grassimage.domain;
 
-import com.battleshippark.grassimage.data.NaverResultItem;
+import com.battleshippark.grassimage.data.ReposNaverResultItem;
 import com.battleshippark.grassimage.data.NaverSearchInteractor;
 import com.battleshippark.grassimage.data.ReposNaverResult;
 
@@ -22,8 +22,8 @@ public class GetNaverResultTest {
     @Test
     public void execute() throws Exception {
         final ReposNaverResult reposNaverResult = new ReposNaverResult(2,
-                Arrays.asList(new NaverResultItem("title1", "thumb1", "sizew1", "sizeh1"),
-                        new NaverResultItem("title2", "thumb2", "sizew2", "sizeh2"))
+                Arrays.asList(new ReposNaverResultItem("title1", "thumb1", "sizew1", "sizeh1"),
+                        new ReposNaverResultItem("title2", "thumb2", "sizew2", "sizeh2"))
         );
         NaverSearchInteractor interactor = (clientId, clientSecret, query) -> Observable.just(reposNaverResult);
         GetNaverResult getNaverResult = new GetNaverResult(interactor, Schedulers.io(), Schedulers.io(), new NaverMapper());

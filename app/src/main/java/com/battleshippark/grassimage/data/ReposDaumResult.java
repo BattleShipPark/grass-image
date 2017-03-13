@@ -6,10 +6,10 @@ import android.support.annotation.VisibleForTesting;
  */
 
 public class ReposDaumResult {
-    public DaumResultChannel channel;
+    public ReposDaumResultChannel channel;
 
     @VisibleForTesting
-    public ReposDaumResult(DaumResultChannel channel) {
+    public ReposDaumResult(ReposDaumResultChannel channel) {
         this.channel = channel;
     }
 

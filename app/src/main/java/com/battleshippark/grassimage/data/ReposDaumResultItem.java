@@ -5,14 +5,14 @@ import android.support.annotation.VisibleForTesting;
 /**
  */
 
-public class DaumResultItem {
+public class ReposDaumResultItem {
     public String title;
     public String image;
     public String thumbnail;
     public String width, height;
 
     @VisibleForTesting
-    public DaumResultItem(String title, String image, String thumbnail, String width, String height) {
+    public ReposDaumResultItem(String title, String image, String thumbnail, String width, String height) {
         this.title = title;
         this.image = image;
         this.thumbnail = thumbnail;
@@ -22,7 +22,7 @@ public class DaumResultItem {
 
     @Override
     public String toString() {
-        return "DaumResultItem{" +
+        return "ReposDaumResultItem{" +
                 "title='" + title + '\'' +
                 ", image='" + image + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +

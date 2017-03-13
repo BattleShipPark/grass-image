@@ -1,7 +1,7 @@
 package com.battleshippark.grassimage.domain;
 
-import com.battleshippark.grassimage.data.DaumResultChannel;
-import com.battleshippark.grassimage.data.DaumResultItem;
+import com.battleshippark.grassimage.data.ReposDaumResultChannel;
+import com.battleshippark.grassimage.data.ReposDaumResultItem;
 import com.battleshippark.grassimage.data.DaumSearchInteractor;
 import com.battleshippark.grassimage.data.ReposDaumResult;
 
@@ -22,9 +22,9 @@ public class GetDaumResultTest {
     @Test
     public void execute() throws Exception {
         final ReposDaumResult reposDaumResult = new ReposDaumResult(
-                new DaumResultChannel(2,
-                        Arrays.asList(new DaumResultItem("title1", "image1", "thumb1", "sizew1", "sizeh1"),
-                                new DaumResultItem("title2", "image2", "thumb2", "sizew2", "sizeh2")))
+                new ReposDaumResultChannel(2,
+                        Arrays.asList(new ReposDaumResultItem("title1", "image1", "thumb1", "sizew1", "sizeh1"),
+                                new ReposDaumResultItem("title2", "image2", "thumb2", "sizew2", "sizeh2")))
         );
         DaumSearchInteractor interactor = (apikey, query) -> Observable.just(reposDaumResult);
         GetDaumResult getDaumResult = new GetDaumResult(interactor, Schedulers.io(), Schedulers.io(), new DaumMapper());
