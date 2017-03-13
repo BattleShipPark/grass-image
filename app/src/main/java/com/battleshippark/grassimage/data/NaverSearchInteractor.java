@@ -6,5 +6,5 @@ import rx.Observable;
  */
 
 public interface NaverSearchInteractor {
-    Observable<NaverResult> query(String clientId, String clientSecret, String query);
+    Observable<ReposNaverResult> query(String clientId, String clientSecret, String query);
 }

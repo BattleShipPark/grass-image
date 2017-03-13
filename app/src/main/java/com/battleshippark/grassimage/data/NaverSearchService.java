@@ -11,7 +11,7 @@ import rx.Observable;
 
 interface NaverSearchService {
     @GET("/v1/search/image.json?&display=10")
-    Observable<NaverResult> query(@Header("X-Naver-Client-Id") String clientId,
-                                  @Header("X-Naver-Client-Secret") String clientSecret,
-                                  @Query("query") String query);
+    Observable<ReposNaverResult> query(@Header("X-Naver-Client-Id") String clientId,
+                                       @Header("X-Naver-Client-Secret") String clientSecret,
+                                       @Query("query") String query);
 }

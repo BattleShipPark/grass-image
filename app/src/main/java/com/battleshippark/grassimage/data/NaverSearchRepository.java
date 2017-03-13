@@ -8,9 +8,9 @@ import rx.Observable;
 /**
  */
 
-class NaverSearchRepository implements NaverSearchInteractor {
+public class NaverSearchRepository implements NaverSearchInteractor {
     @Override
-    public Observable<NaverResult> query(String clientId, String clientSecret, String query) {
+    public Observable<ReposNaverResult> query(String clientId, String clientSecret, String query) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://openapi.naver.com")
                 .addConverterFactory(GsonConverterFactory.create())
