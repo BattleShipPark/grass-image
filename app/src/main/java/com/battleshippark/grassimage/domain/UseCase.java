@@ -5,6 +5,6 @@ import rx.Subscriber;
 /**
  */
 
-public interface UseCase<P, T> {
-    void execute(P param, Subscriber<T> subscriber);
+public interface UseCase<T> {
+    void execute(Subscriber<T> subscriber);
 }

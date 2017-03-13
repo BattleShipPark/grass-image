@@ -1,5 +1,6 @@
 package com.battleshippark.grassimage.domain;
 
+import com.battleshippark.grassimage.BuildConfig;
 import com.battleshippark.grassimage.data.ReposNaverResultItem;
 import com.battleshippark.grassimage.data.NaverSearchInteractor;
 import com.battleshippark.grassimage.data.ReposNaverResult;
@@ -25,12 +26,13 @@ public class GetNaverResultTest {
                 Arrays.asList(new ReposNaverResultItem("title1", "thumb1", "sizew1", "sizeh1"),
                         new ReposNaverResultItem("title2", "thumb2", "sizew2", "sizeh2"))
         );
-        NaverSearchInteractor interactor = (clientId, clientSecret, query) -> Observable.just(reposNaverResult);
-        GetNaverResult getNaverResult = new GetNaverResult(interactor, Schedulers.io(), Schedulers.io(), new NaverMapper());
-        TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
+        final NaverSearchInteractor interactor = (clientId, clientSecret, query) -> Observable.just(reposNaverResult);
+        final GetNaverResult.Param param = new GetNaverResult.Param(null, null, null);
+        final GetNaverResult getNaverResult = new GetNaverResult(interactor, param, Schedulers.io(), Schedulers.io(), new NaverMapper());
+        final TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
 
 
-        getNaverResult.execute(new GetNaverResult.Param(null, null, null), subscriber);
+        getNaverResult.execute(subscriber);
 
 
         subscriber.awaitTerminalEvent();

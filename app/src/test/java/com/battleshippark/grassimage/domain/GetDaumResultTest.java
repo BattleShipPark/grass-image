@@ -14,6 +14,7 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.filter;
 
 
 /**
@@ -26,12 +27,13 @@ public class GetDaumResultTest {
                         Arrays.asList(new ReposDaumResultItem("title1", "image1", "thumb1", "sizew1", "sizeh1"),
                                 new ReposDaumResultItem("title2", "image2", "thumb2", "sizew2", "sizeh2")))
         );
-        DaumSearchInteractor interactor = (apikey, query) -> Observable.just(reposDaumResult);
-        GetDaumResult getDaumResult = new GetDaumResult(interactor, Schedulers.io(), Schedulers.io(), new DaumMapper());
-        TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
+        final DaumSearchInteractor interactor = (apikey, query) -> Observable.just(reposDaumResult);
+        final GetDaumResult.Param param = new GetDaumResult.Param(null, null);
+        final GetDaumResult getDaumResult = new GetDaumResult(interactor, param, Schedulers.io(), Schedulers.io(), new DaumMapper());
+        final TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
 
 
-        getDaumResult.execute(new GetDaumResult.Param(null, null), subscriber);
+        getDaumResult.execute(subscriber);
 
 
         subscriber.awaitTerminalEvent();

@@ -8,21 +8,23 @@ import rx.Subscriber;
 /**
  */
 
-public class GetDaumResult implements UseCase<GetDaumResult.Param, DomainResult> {
+public class GetDaumResult implements UseCase<DomainResult> {
     private final DaumSearchInteractor interactor;
+    private final Param param;
     private final Scheduler scheduler;
     private final Scheduler postScheduler;
     private final DaumMapper mapper;
 
-    public GetDaumResult(DaumSearchInteractor interactor, Scheduler scheduler, Scheduler postScheduler, DaumMapper mapper) {
+    public GetDaumResult(DaumSearchInteractor interactor, Param param, Scheduler scheduler, Scheduler postScheduler, DaumMapper mapper) {
         this.interactor = interactor;
+        this.param = param;
         this.scheduler = scheduler;
         this.postScheduler = postScheduler;
         this.mapper = mapper;
     }
 
     @Override
-    public void execute(Param param, Subscriber<DomainResult> subscriber) {
+    public void execute(Subscriber<DomainResult> subscriber) {
         interactor.query(param.apikey, param.query)
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposDaumResult -> {
             subscriber.onNext(mapper.from(reposDaumResult));
