@@ -12,8 +12,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "NAVER_CLIENT_ID", GI_NAVER_CLIENT_ID
-        buildConfigField "String", "NAVER_CLIENT_SECRET", GI_NAVER_CLIENT_SECRET
+        buildConfigField "String", "NAVER_CLIENT_ID", '"5LJAdVZFb13ktVTxW9Zf"'
+        buildConfigField "String", "NAVER_CLIENT_SECRET", '"YFJQZPc8ja"'
     }
     buildTypes {
         release {
