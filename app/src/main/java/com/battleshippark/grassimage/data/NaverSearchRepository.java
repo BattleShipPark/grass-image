@@ -14,6 +14,7 @@ class NaverSearchRepository implements NaverSearchInteractor {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://openapi.naver.com")
                 .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 

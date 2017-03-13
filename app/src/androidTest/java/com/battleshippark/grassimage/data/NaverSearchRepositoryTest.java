@@ -26,5 +26,4 @@ public class NaverSearchRepositoryTest {
         NaverResult result = subscriber.getOnNextEvents().get(0);
         Log.i("Test", result.toString());
     }
-
 }
