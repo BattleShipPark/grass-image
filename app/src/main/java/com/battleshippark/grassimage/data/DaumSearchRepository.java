@@ -10,7 +10,7 @@ import rx.Observable;
 
 class DaumSearchRepository implements DaumSearchInteractor {
     @Override
-    public Observable<DaumResult> query(String apikey, String query) {
+    public Observable<ReposDaumResult> query(String apikey, String query) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://apis.daum.net")
                 .addConverterFactory(GsonConverterFactory.create())

@@ -6,5 +6,5 @@ import rx.Observable;
  */
 
 public interface DaumSearchInteractor {
-    Observable<DaumResult> query(String apiKey, String query);
+    Observable<ReposDaumResult> query(String apiKey, String query);
 }

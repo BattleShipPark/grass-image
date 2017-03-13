@@ -9,7 +9,7 @@ import java.util.List;
 /**
  */
 
-class Mapper {
+class NaverMapper {
     DomainResult from(ReposNaverResult reposResult) {
         return new DomainResult(
                 reposResult.total, from(reposResult.items)

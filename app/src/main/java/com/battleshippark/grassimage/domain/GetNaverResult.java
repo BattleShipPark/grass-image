@@ -12,20 +12,20 @@ public class GetNaverResult implements UseCase<GetNaverResult.Param, DomainResul
     private final NaverSearchInteractor interactor;
     private final Scheduler scheduler;
     private final Scheduler postScheduler;
-    private final Mapper mapper;
+    private final NaverMapper naverMapper;
 
-    public GetNaverResult(NaverSearchInteractor interactor, Scheduler scheduler, Scheduler postScheduler, Mapper mapper) {
+    public GetNaverResult(NaverSearchInteractor interactor, Scheduler scheduler, Scheduler postScheduler, NaverMapper naverMapper) {
         this.interactor = interactor;
         this.scheduler = scheduler;
         this.postScheduler = postScheduler;
-        this.mapper = mapper;
+        this.naverMapper = naverMapper;
     }
 
     @Override
     public void execute(Param param, Subscriber<DomainResult> subscriber) {
         interactor.query(param.clientId, param.clientSecret, param.query)
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposNaverResult -> {
-            subscriber.onNext(mapper.from(reposNaverResult));
+            subscriber.onNext(naverMapper.from(reposNaverResult));
             subscriber.onCompleted();
         });
     }

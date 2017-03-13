@@ -1,8 +1,9 @@
 package com.battleshippark.grassimage.domain;
 
-import com.battleshippark.grassimage.data.NaverResultItem;
-import com.battleshippark.grassimage.data.NaverSearchInteractor;
-import com.battleshippark.grassimage.data.ReposNaverResult;
+import com.battleshippark.grassimage.data.DaumResultChannel;
+import com.battleshippark.grassimage.data.DaumResultItem;
+import com.battleshippark.grassimage.data.DaumSearchInteractor;
+import com.battleshippark.grassimage.data.ReposDaumResult;
 
 import org.junit.Test;
 
@@ -17,20 +18,20 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  */
-public class GetNaverResultTest {
-
+public class GetDaumResultTest {
     @Test
     public void execute() throws Exception {
-        final ReposNaverResult reposNaverResult = new ReposNaverResult(2,
-                Arrays.asList(new NaverResultItem("title1", "thumb1", "sizew1", "sizeh1"),
-                        new NaverResultItem("title2", "thumb2", "sizew2", "sizeh2"))
+        final ReposDaumResult reposDaumResult = new ReposDaumResult(
+                new DaumResultChannel(2,
+                        Arrays.asList(new DaumResultItem("title1", "image1", "thumb1", "sizew1", "sizeh1"),
+                                new DaumResultItem("title2", "image2", "thumb2", "sizew2", "sizeh2")))
         );
-        NaverSearchInteractor interactor = (clientId, clientSecret, query) -> Observable.just(reposNaverResult);
-        GetNaverResult getNaverResult = new GetNaverResult(interactor, Schedulers.io(), Schedulers.io(), new NaverMapper());
+        DaumSearchInteractor interactor = (apikey, query) -> Observable.just(reposDaumResult);
+        GetDaumResult getDaumResult = new GetDaumResult(interactor, Schedulers.io(), Schedulers.io(), new DaumMapper());
         TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
 
 
-        getNaverResult.execute(new GetNaverResult.Param(null, null, null), subscriber);
+        getDaumResult.execute(new GetDaumResult.Param(null, null), subscriber);
 
 
         subscriber.awaitTerminalEvent();
