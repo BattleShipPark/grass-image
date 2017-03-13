@@ -14,6 +14,7 @@ android {
 
         buildConfigField "String", "NAVER_CLIENT_ID", '"5LJAdVZFb13ktVTxW9Zf"'
         buildConfigField "String", "NAVER_CLIENT_SECRET", '"YFJQZPc8ja"'
+        buildConfigField "String", "DAUM_API_KEY", '"fcce74ce4bfa9728c6ff5dc6abd60238"'
     }
     buildTypes {
         release {
