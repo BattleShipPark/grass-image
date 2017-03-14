@@ -3,11 +3,11 @@ package com.battleshippark.grassimage.domain;
 /**
  */
 
-class DomainResultItem {
-    String title;
-    String thumbnail;
+public class DomainResultItem {
+    public String title;
+    public String thumbnail;
 
-    DomainResultItem(String title, String thumbnail) {
+    public DomainResultItem(String title, String thumbnail) {
         this.title = title;
         this.thumbnail = thumbnail;
     }

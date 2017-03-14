@@ -1,0 +1,47 @@
+package com.battleshippark.grassimage.presentation;
+
+import com.battleshippark.grassimage.domain.DomainResult;
+import com.battleshippark.grassimage.domain.DomainResultItem;
+import com.battleshippark.grassimage.domain.UseCase;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Arrays;
+
+import rx.Subscriber;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.verify;
+
+/**
+ */
+@RunWith(MockitoJUnitRunner.class)
+public class MainPresenterTest {
+    @Mock
+    UiListener uiListener;
+
+    @Test
+    public void load_naver() throws Exception {
+        DomainResult domainResult = new DomainResult(2,
+                Arrays.asList(new DomainResultItem("title1", "thumb1"),
+                        new DomainResultItem("title2", "thumb2"))
+        );
+        UseCase<DomainResult> getNaverResult = subscriber -> {
+            subscriber.onNext(domainResult);
+            subscriber.onCompleted();
+        };
+        Mapper mapper = new Mapper();
+        MainPresenter presenter = new MainPresenter(uiListener, getNaverResult, null, mapper);
+        presenter.load(MainPresenter.Mode.NAVER);
+
+        InOrder inOrder = inOrder(uiListener);
+        inOrder.verify(uiListener).update(mapper.from(domainResult));
+        inOrder.verify(uiListener).hideProgress();
+    }
+
+}

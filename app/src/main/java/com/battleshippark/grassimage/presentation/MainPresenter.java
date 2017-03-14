@@ -12,15 +12,19 @@ class MainPresenter {
     private final UiListener uiListener;
     private final UseCase<DomainResult> getNaverResult;
     private final UseCase<DomainResult> getDaumResult;
+    private final Mapper mapper;
 
     MainPresenter(UiListener uiListener, UseCase<DomainResult> getNaverResult,
-                  UseCase<DomainResult> getDaumResult) {
+                  UseCase<DomainResult> getDaumResult, Mapper mapper) {
         this.uiListener = uiListener;
         this.getNaverResult = getNaverResult;
         this.getDaumResult = getDaumResult;
+        this.mapper = mapper;
     }
 
     void load(Mode mode) {
+        uiListener.showProgress();
+
         switch (mode) {
             case NAVER:
                 getNaverResult.execute(new MainSubscriber());
@@ -36,16 +40,18 @@ class MainPresenter {
     class MainSubscriber extends Subscriber<DomainResult> {
         @Override
         public void onCompleted() {
-
+            uiListener.hideProgress();
         }
 
         @Override
         public void onError(Throwable e) {
-
+            uiListener.hideProgress();
+            uiListener.showErrorPage();
         }
 
         @Override
         public void onNext(DomainResult domainResult) {
+            uiListener.update(mapper.from(domainResult));
         }
     }
 }
