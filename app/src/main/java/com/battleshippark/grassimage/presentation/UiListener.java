@@ -11,4 +11,8 @@ interface UiListener {
     void hideProgress();
 
     void showErrorPage();
+
+    void showEmptyPage();
+
+    void hideEmptyPage();
 }

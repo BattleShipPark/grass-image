@@ -46,12 +46,18 @@ class MainPresenter {
         @Override
         public void onError(Throwable e) {
             uiListener.hideProgress();
+            uiListener.hideEmptyPage();
             uiListener.showErrorPage();
         }
 
         @Override
         public void onNext(DomainResult domainResult) {
-            uiListener.update(mapper.from(domainResult));
+            if (domainResult.total == 0) {
+                uiListener.showEmptyPage();
+            } else {
+                uiListener.hideEmptyPage();
+                uiListener.update(mapper.from(domainResult));
+            }
         }
     }
 }

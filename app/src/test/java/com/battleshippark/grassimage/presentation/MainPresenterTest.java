@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import rx.Subscriber;
 
@@ -24,6 +25,22 @@ import static org.mockito.Mockito.verify;
 public class MainPresenterTest {
     @Mock
     UiListener uiListener;
+
+    @Test
+    public void load_naver_empty() throws Exception {
+        DomainResult domainResult = new DomainResult(0, Collections.EMPTY_LIST);
+        UseCase<DomainResult> getNaverResult = subscriber -> {
+            subscriber.onNext(domainResult);
+            subscriber.onCompleted();
+        };
+        Mapper mapper = new Mapper();
+        MainPresenter presenter = new MainPresenter(uiListener, getNaverResult, null, mapper);
+        presenter.load(MainPresenter.Mode.NAVER);
+
+        InOrder inOrder = inOrder(uiListener);
+        inOrder.verify(uiListener).showEmptyPage();
+        inOrder.verify(uiListener).hideProgress();
+    }
 
     @Test
     public void load_naver() throws Exception {
@@ -40,6 +57,7 @@ public class MainPresenterTest {
         presenter.load(MainPresenter.Mode.NAVER);
 
         InOrder inOrder = inOrder(uiListener);
+        inOrder.verify(uiListener).hideEmptyPage();
         inOrder.verify(uiListener).update(mapper.from(domainResult));
         inOrder.verify(uiListener).hideProgress();
     }
