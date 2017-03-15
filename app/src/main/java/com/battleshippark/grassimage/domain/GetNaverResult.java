@@ -29,7 +29,7 @@ public class GetNaverResult implements UseCase<DomainResult> {
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposNaverResult -> {
             subscriber.onNext(naverMapper.from(reposNaverResult));
             subscriber.onCompleted();
-        });
+        }, subscriber::onError);
     }
 
     public static class Param {

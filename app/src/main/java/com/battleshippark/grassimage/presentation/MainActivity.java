@@ -2,6 +2,8 @@ package com.battleshippark.grassimage.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     private MainPresenter presenter;
 
+    private MainPresenter.Mode mode = MainPresenter.Mode.NAVER;
+    private MainAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     @Override
     public void update(SearchResult result) {
-
+        adapter.setItems(result.items);
     }
 
     @Override
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     @Override
     public void load() {
-
+        presenter.load(mode, queryEdit.getText().toString());
     }
 
     private void initData() {
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements UiListener {
                 ),
                 new Mapper());
         presenter.init();
+
+        adapter = new MainAdapter(this);
     }
 
     private void initUI() {
@@ -112,5 +119,7 @@ public class MainActivity extends AppCompatActivity implements UiListener {
             public void afterTextChanged(Editable s) {
             }
         });
+        recyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.span_count)));
+        recyclerView.setAdapter(adapter);
     }
 }

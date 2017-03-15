@@ -29,7 +29,7 @@ public class GetDaumResult implements UseCase<DomainResult> {
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposDaumResult -> {
             subscriber.onNext(mapper.from(reposDaumResult));
             subscriber.onCompleted();
-        });
+        }, subscriber::onError);
     }
 
     public static class Param {
