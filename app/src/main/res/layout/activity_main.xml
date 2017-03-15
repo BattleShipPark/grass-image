@@ -56,11 +56,28 @@
         android:layout_height="match_parent"
         android:layout_below="@id/query_layout"/>
 
+    <TextView
+        android:id="@+id/empty_result_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/query_layout"
+        android:text="검색 결과가 없습니다"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/error_result_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/query_layout"
+        android:text="에러가 발생했습니다. 잠시 후 다시 시도해 주세요"
+        android:visibility="gone"/>
+
     <FrameLayout
         android:id="@+id/progress_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80ffffff">
+        android:background="#80ffffff"
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"

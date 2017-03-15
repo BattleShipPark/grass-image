@@ -75,9 +75,8 @@ class MainPresenter {
 
         @Override
         public void onError(Throwable e) {
-            uiListener.hideProgress();
-            uiListener.hideEmptyPage();
             uiListener.showErrorPage();
+            uiListener.hideProgress();
         }
 
         @Override

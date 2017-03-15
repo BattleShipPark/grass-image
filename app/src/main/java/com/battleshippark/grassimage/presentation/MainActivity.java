@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.battleshippark.grassimage.BuildConfig;
 import com.battleshippark.grassimage.R;
@@ -33,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements UiListener {
     EditText queryEdit;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.empty_result_text)
+    TextView emptyResultText;
+    @BindView(R.id.error_result_text)
+    TextView errorResultText;
     @BindView(R.id.progress_layout)
     View progressLayout;
 
@@ -74,17 +79,23 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     @Override
     public void showErrorPage() {
-
+        emptyResultText.setVisibility(View.GONE);
+        errorResultText.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
     public void showEmptyPage() {
-
+        emptyResultText.setVisibility(View.VISIBLE);
+        errorResultText.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideEmptyPage() {
-
+        emptyResultText.setVisibility(View.GONE);
+        errorResultText.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -116,9 +127,14 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     private void initUI() {
         engineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int prevPos = -1;
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                presenter.changeMode(position);
+                if (prevPos != -1) {
+                    presenter.changeMode(position);
+                }
+                prevPos = position;
             }
 
             @Override
