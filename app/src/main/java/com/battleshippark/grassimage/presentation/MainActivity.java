@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements UiListener {
     }
 
     @Override
+    protected void onDestroy() {
+        presenter.release();
+        super.onDestroy();
+    }
+
+    @Override
     public void update(SearchResult result) {
 
     }
@@ -72,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     }
 
+    @Override
+    public void load() {
+
+    }
+
     private void initData() {
         presenter = new MainPresenter(this,
                 new GetNaverResult(new NaverSearchRepository(),
@@ -83,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements UiListener {
                         Schedulers.io(), AndroidSchedulers.mainThread(), new DaumMapper()
                 ),
                 new Mapper());
+        presenter.init();
     }
 
     private void initUI() {
@@ -93,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                presenter.onTextChanged(s.toString());
+                presenter.onQueryChanged(s.toString());
             }
 
             @Override

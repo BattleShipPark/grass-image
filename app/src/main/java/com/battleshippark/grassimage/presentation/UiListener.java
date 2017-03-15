@@ -15,4 +15,6 @@ interface UiListener {
     void showEmptyPage();
 
     void hideEmptyPage();
+
+    void load();
 }

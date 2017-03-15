@@ -17,6 +17,7 @@ import rx.Subscriber;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -62,4 +63,29 @@ public class MainPresenterTest {
         inOrder.verify(uiListener).hideProgress();
     }
 
+    @Test
+    public void onQueryChanged_emptyToNonEmpty_inShortTerm() throws InterruptedException {
+        MainPresenter presenter = new MainPresenter(uiListener, null, null, null);
+        presenter.init();
+
+
+        presenter.onQueryChanged("nonEmpty");
+
+
+        Thread.sleep(500);
+        verify(uiListener, never()).load();
+    }
+
+    @Test
+    public void onQueryChanged_emptyToNonEmpty_inEnoughTerm() throws InterruptedException {
+        MainPresenter presenter = new MainPresenter(uiListener, null, null, null);
+        presenter.init();
+
+
+        presenter.onQueryChanged("nonEmpty");
+
+
+        Thread.sleep(1100);
+        verify(uiListener).load();
+    }
 }
