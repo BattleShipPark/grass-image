@@ -60,6 +60,10 @@ class MainPresenter {
         queryChanged.onNext(query);
     }
 
+    void changeMode(int position) {
+        uiListener.changeMode(Mode.values()[position]);
+    }
+
     enum Mode {NAVER, DAUM}
 
     class MainSubscriber extends Subscriber<DomainResult> {

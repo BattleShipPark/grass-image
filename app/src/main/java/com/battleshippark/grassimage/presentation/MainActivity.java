@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -88,6 +90,12 @@ public class MainActivity extends AppCompatActivity implements UiListener {
         presenter.load(mode, queryEdit.getText().toString());
     }
 
+    @Override
+    public void changeMode(MainPresenter.Mode mode) {
+        this.mode = mode;
+        load();
+    }
+
     private void initData() {
         presenter = new MainPresenter(this,
                 new GetNaverResult(new NaverSearchRepository(),
@@ -105,6 +113,16 @@ public class MainActivity extends AppCompatActivity implements UiListener {
     }
 
     private void initUI() {
+        engineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.changeMode(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         queryEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

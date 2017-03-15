@@ -17,4 +17,6 @@ interface UiListener {
     void hideEmptyPage();
 
     void load();
+
+    void changeMode(MainPresenter.Mode mode);
 }
