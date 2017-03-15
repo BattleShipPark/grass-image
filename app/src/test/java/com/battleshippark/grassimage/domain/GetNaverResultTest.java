@@ -27,12 +27,12 @@ public class GetNaverResultTest {
                         new ReposNaverResultItem("title2", "thumb2", "sizew2", "sizeh2"))
         );
         final NaverSearchInteractor interactor = (clientId, clientSecret, query) -> Observable.just(reposNaverResult);
-        final GetNaverResult.Param param = new GetNaverResult.Param(null, null, null);
+        final GetNaverResult.Param param = new GetNaverResult.Param(null, null);
         final GetNaverResult getNaverResult = new GetNaverResult(interactor, param, Schedulers.io(), Schedulers.io(), new NaverMapper());
         final TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
 
 
-        getNaverResult.execute(subscriber);
+        getNaverResult.execute(null, subscriber);
 
 
         subscriber.awaitTerminalEvent();

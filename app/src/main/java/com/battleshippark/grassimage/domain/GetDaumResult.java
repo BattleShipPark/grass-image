@@ -24,8 +24,8 @@ public class GetDaumResult implements UseCase<DomainResult> {
     }
 
     @Override
-    public void execute(Subscriber<DomainResult> subscriber) {
-        interactor.query(param.apikey, param.query)
+    public void execute(String query, Subscriber<DomainResult> subscriber) {
+        interactor.query(param.apikey, query)
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposDaumResult -> {
             subscriber.onNext(mapper.from(reposDaumResult));
             subscriber.onCompleted();
@@ -34,11 +34,9 @@ public class GetDaumResult implements UseCase<DomainResult> {
 
     public static class Param {
         String apikey;
-        String query;
 
-        public Param(String apikey, String query) {
+        public Param(String apikey) {
             this.apikey = apikey;
-            this.query = query;
         }
     }
 }

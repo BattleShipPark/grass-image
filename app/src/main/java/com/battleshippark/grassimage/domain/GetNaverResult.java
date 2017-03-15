@@ -24,8 +24,8 @@ public class GetNaverResult implements UseCase<DomainResult> {
     }
 
     @Override
-    public void execute(Subscriber<DomainResult> subscriber) {
-        interactor.query(param.clientId, param.clientSecret, param.query)
+    public void execute(String query, Subscriber<DomainResult> subscriber) {
+        interactor.query(param.clientId, param.clientSecret, query)
                 .subscribeOn(scheduler).observeOn(postScheduler).subscribe(reposNaverResult -> {
             subscriber.onNext(naverMapper.from(reposNaverResult));
             subscriber.onCompleted();
@@ -34,12 +34,10 @@ public class GetNaverResult implements UseCase<DomainResult> {
 
     public static class Param {
         String clientId, clientSecret;
-        String query;
 
-        public Param(String clientId, String clientSecret, String query) {
+        public Param(String clientId, String clientSecret) {
             this.clientId = clientId;
             this.clientSecret = clientSecret;
-            this.query = query;
         }
     }
 }

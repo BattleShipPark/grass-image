@@ -6,5 +6,5 @@ import rx.Subscriber;
  */
 
 public interface UseCase<T> {
-    void execute(Subscriber<T> subscriber);
+    void execute(String query, Subscriber<T> subscriber);
 }

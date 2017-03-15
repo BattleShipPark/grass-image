@@ -9,7 +9,7 @@ import java.util.List;
 /**
  */
 
-class DaumMapper {
+public class DaumMapper {
     public DomainResult from(ReposDaumResult reposResult) {
         return new DomainResult(
                 reposResult.channel.result, from(reposResult.channel.item)

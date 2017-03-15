@@ -28,12 +28,12 @@ public class GetDaumResultTest {
                                 new ReposDaumResultItem("title2", "image2", "thumb2", "sizew2", "sizeh2")))
         );
         final DaumSearchInteractor interactor = (apikey, query) -> Observable.just(reposDaumResult);
-        final GetDaumResult.Param param = new GetDaumResult.Param(null, null);
+        final GetDaumResult.Param param = new GetDaumResult.Param(null);
         final GetDaumResult getDaumResult = new GetDaumResult(interactor, param, Schedulers.io(), Schedulers.io(), new DaumMapper());
         final TestSubscriber<DomainResult> subscriber = new TestSubscriber<>();
 
 
-        getDaumResult.execute(subscriber);
+        getDaumResult.execute(null, subscriber);
 
 
         subscriber.awaitTerminalEvent();

@@ -8,7 +8,7 @@ import rx.Observable;
 /**
  */
 
-class DaumSearchRepository implements DaumSearchInteractor {
+public class DaumSearchRepository implements DaumSearchInteractor {
     @Override
     public Observable<ReposDaumResult> query(String apikey, String query) {
         Retrofit retrofit = new Retrofit.Builder()

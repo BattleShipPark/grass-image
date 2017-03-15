@@ -22,15 +22,15 @@ class MainPresenter {
         this.mapper = mapper;
     }
 
-    void load(Mode mode) {
+    void load(Mode mode, String query) {
         uiListener.showProgress();
 
         switch (mode) {
             case NAVER:
-                getNaverResult.execute(new MainSubscriber());
+                getNaverResult.execute(query, new MainSubscriber());
                 break;
             case DAUM:
-                getDaumResult.execute(new MainSubscriber());
+                getDaumResult.execute(query, new MainSubscriber());
                 break;
         }
     }

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Grass Image</string>
+    <string-array name="search_engine_array">
+        <item>Naver</item>
+        <item>Daum</item>
+    </string-array>
 </resources>
