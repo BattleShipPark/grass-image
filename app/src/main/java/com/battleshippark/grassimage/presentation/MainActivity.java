@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements UiListener {
     EditText queryEdit;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.progress_layout)
+    View progressLayout;
 
     private MainPresenter presenter;
 
@@ -62,12 +64,12 @@ public class MainActivity extends AppCompatActivity implements UiListener {
 
     @Override
     public void showProgress() {
-
+        progressLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progressLayout.setVisibility(View.GONE);
     }
 
     @Override

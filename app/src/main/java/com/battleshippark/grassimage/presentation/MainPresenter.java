@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -33,7 +34,7 @@ class MainPresenter {
 
     void init() {
         subsc = queryChanged
-                .lift(new OperatorThrottleLastAfterPeriod<>(1, TimeUnit.SECONDS, Schedulers.io()))
+                .lift(new OperatorThrottleLastAfterPeriod<>(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread()))
                 .subscribe(query -> uiListener.load());
     }
 

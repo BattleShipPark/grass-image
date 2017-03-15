@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp"
-              android:orientation="vertical"
-              tools:context="com.battleshippark.grassimage.presentation.MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                tools:context="com.battleshippark.grassimage.presentation.MainActivity">
 
     <LinearLayout
+        android:id="@+id/engine_layout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
@@ -28,8 +29,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/query_layout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_below="@id/engine_layout"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -50,6 +53,19 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/query_layout"/>
+
+    <FrameLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80ffffff">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+</RelativeLayout>
